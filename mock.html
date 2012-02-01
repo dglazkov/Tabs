@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tabs - Shadow DOM Code Sample</title>
+<style>
+
+h2:nth-of-type(1) {
+    background-color: #333; color: white;
+}
+
+div.strip h2, div.more {
+    font-size: medium; font-weight: normal; margin: 0 2px 0 0; padding: 5px 15px; text-align: center; text-overflow: ellipsis; overflow: hidden; cursor: pointer;
+}
+
+div.more {
+    margin: 0;
+}
+
+div.overflow {
+    position: relative;
+}
+
+
+div.strip {
+    display: -webkit-flexbox; -webkit-flex-pack: justify; padding: 0 0 2px 0;
+}
+
+div.stuff {
+    position:absolute; background: #fff; border: 1px solid #999; padding: 2px 0 2px 2px; right: 0;
+}
+
+div.current {
+    border: 1px solid #ccc; padding: 10px;
+}
+
+div.container {
+    display: -webkit-flexbox; -webkit-flex-direction: column; -webkit-flex-align: stretch;
+}
+
+article {
+    width: 500px;
+}
+
+</style>
+</head>
+<body>
+<h1>Tabs</h1>
+<article class="tabs">
+    <div class="container">
+        <div class="strip">
+            <h2>General</h2>
+            <h2>Display</h2>
+            <h2>Network</h2>
+            <div class="overflow">
+                <div class="more">&hellip;</div>
+                <div class="stuff">
+                    <h2>Security</h2>
+                    <h2>Storage</h2>
+                    <h2>About</h2>
+                </div>
+            </div>
+        </div>
+        <div class="current">
+            <section>Tab1 contents</section>
+        </div>
+    </div>
+</article>
+</body>
+</html>
