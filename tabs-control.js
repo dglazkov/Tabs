@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!window.WebKitShadowRoot)
         return;
 
-    [].forEach.call(document.querySelectorAll('.tabs'), function(element) {
+    [].forEach.call(document.querySelectorAll('[is=tabs]'), function(element) {
         new TabsControl(element);
     });
 })
