@@ -22,7 +22,7 @@ var HTML_TEMPLATE = [
     '<style>',
         'h2:nth-of-type(1) {', CURRENT_TAB_STYLE, '} ', 
         'h2 {', TAB_STYLE, '}',
-        'h2:nth-of-type(n+', OVERFLOW_LIMIT + 1, ') { text-align: left; box-shadow: 0; border-radius: 0; background: white; }',
+        'h2:nth-of-type(n+', OVERFLOW_LIMIT + 1, ') { text-align: left; box-shadow: none; border-radius: 0; background: white; }',
     '</style>',
     '<div style="', CONTAINER_STYLE, '">',
         '<div style="', TAB_STRIP_STYLE, '">',
