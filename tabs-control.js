@@ -8,13 +8,27 @@ var CURRENT_TAB_STYLE = 'background: white; color: black; -webkit-user-select: n
 var TAB_STYLE = 'font-family: \'Open Sans\'; font-size: 16px; line-height: 22px; font-weight: 400; padding: 5px 15px; margin: 0 5px 0 0; text-align: center; text-overflow: ellipsis; overflow: hidden; cursor: pointer; -webkit-user-select: none; border-top-left-radius: 6px; border-top-right-radius: 6px; background: rgb(242, 242, 242); color: rgb(64, 64, 64); box-shadow: 0 2px 2px rgba(0, 0, 0, .3);';
 var MORE_STYLE = '';
 var TAB_STRIP_STYLE = 'display: -webkit-flexbox; -webkit-flex-pack: justify; padding: 0 5px; -webkit-user-select: none;';
-var TAB_WRAPPER_STYLE = 'display: -webkit-flexbox; overflow: hidden; height: 30px;';
+var TAB_WRAPPER_STYLE = 'display: -webkit-flexbox; height: 30px;';
 var CURRENT_CONTENTS_STYLE = 'box-shadow: 0 2px 2px rgba(0, 0, 0, .3); background: white; border-radius: 3px; padding: 5px 20px; font-family: \'Open Sans\'; font-size: 14px; line-height: 20px; overflow: auto; height: 600px';
 var CONTAINER_STYLE = 'display: -webkit-flexbox; -webkit-flex-direction: column; -webkit-flex-align: stretch; background: -webkit-linear-gradient(rgb(230, 230, 230), rgb(200, 200, 200)); padding: 10px; -webkit-font-smoothing: antialiased;';
 var HELP_STYLE = 'background-color: #eee; padding: 5px 10px; margin: 2px 0 0 0; font-family: \'Open Sans\'; font-size: 11px; border-radius: 3px; box-shadow: 0 2px 2px rgba(0, 0, 0, .3);';
 var OVERFLOW_STYLE = 'position: relative';
 var OVERFLOW_TAB_STRIP_STYLE_CLOSED = 'display:none';
 var OVERFLOW_TAB_STRIP_STYLE_OPEN = 'position:absolute; background: #fff; border: 1px solid #999; padding: 2px 0 2px 2px; right: 0; width: 300px';
+
+// FIXME: Remove when Inspector support shadow DOM subtrees.
+// Styles to debug.
+// var CURRENT_TAB_STYLE = '';
+// var TAB_STYLE = '';
+// var MORE_STYLE = '';
+// var TAB_STRIP_STYLE = '';
+// var TAB_WRAPPER_STYLE = '';
+// var CURRENT_CONTENTS_STYLE = '';
+// var CONTAINER_STYLE = '';
+// var HELP_STYLE = '';
+// var OVERFLOW_STYLE = '';
+// var OVERFLOW_TAB_STRIP_STYLE_CLOSED = '';
+// var OVERFLOW_TAB_STRIP_STYLE_OPEN = '';
 
 // FIXME: Should use HTML Templates once available.
 var HTML_TEMPLATE = [
@@ -27,11 +41,11 @@ var HTML_TEMPLATE = [
     '</style>',
     '<div style="', CONTAINER_STYLE, '">',
         '<div style="', TAB_STRIP_STYLE, '">',
-            '<div style="', TAB_WRAPPER_STYLE, ';width: -webkit-flex(1);">',
+            '<div style="', TAB_WRAPPER_STYLE, '">',
                '<content class="strip" select="h2:nth-of-type(-n+', OVERFLOW_LIMIT, ')"></content>',
             '</div>',
             '<div class="overflow" style="', OVERFLOW_STYLE, '">',
-                '<div style="', TAB_WRAPPER_STYLE, '">',
+                '<div style="', TAB_WRAPPER_STYLE, '; overflow: hidden">',
                     '<div class="more" style="', TAB_STYLE, MORE_STYLE, '">&hellip;</div>',
                 '</div>',
                 '<div style="', OVERFLOW_TAB_STRIP_STYLE_CLOSED, '">',
