@@ -135,12 +135,6 @@ TabsControl.prototype = {
         this.current.select = 'section:nth-of-type(' + this.currentIndex + ')';
         this.style.deleteRule(0);
         this.style.insertRule('h2:nth-of-type(' + this.currentIndex + '){' + CURRENT_TAB_STYLE + '}', 0);
-        this.jiggle();
-    },
-    // FIXME: A hack to make content styles recalculate correctly.
-    jiggle: function() {
-        this.current.style.display = 'none';
-        this.current.style.removeProperty('display');
     },
     sectionCount: function() {
         return this.root.host.querySelectorAll('section').length;
