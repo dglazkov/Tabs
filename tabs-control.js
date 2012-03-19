@@ -32,31 +32,43 @@ var OVERFLOW_TAB_STRIP_STYLE_OPEN = 'position:absolute; background: #fff; border
 
 // FIXME: Should use HTML Templates once available.
 var HTML_TEMPLATE = [
-    // FIXME: These are tricky. They should only apply to elements distributed to insertion points. The spec does not have anything like this.
+    // FIXME: These are tricky. They will break as soon as we implement the spec correctly. Wait until /select/ is implemented and convert.
     '<style>',
-        'h2:nth-of-type(1) {', CURRENT_TAB_STYLE, '} ', 
+        'h2:nth-of-type(1) {', CURRENT_TAB_STYLE, '}', 
         'h2 {', TAB_STYLE, '}',
         'h2:nth-of-type(n+', OVERFLOW_LIMIT + 1, ') { text-align: left; box-shadow: none; border-radius: 0; background: white; }',
         'h2:nth-of-type(n+', OVERFLOW_LIMIT + 1, '):hover { background: rgba(0, 0, 0, .1); }',
     '</style>',
-    '<div style="', CONTAINER_STYLE, '">',
-        '<div style="', TAB_STRIP_STYLE, '">',
-            '<div style="', TAB_WRAPPER_STYLE, '">',
+    '<style scoped>',
+        'div.container {', CONTAINER_STYLE, '}',
+        '.tab-strip {', TAB_STRIP_STYLE, '}',
+        '.tab-wrapper {', TAB_WRAPPER_STYLE, '}',
+        'div.overflow {', OVERFLOW_STYLE, '}',
+        'div.overflow .tab-wrapper { overflow: hidden; }',
+        'div.more {', TAB_STYLE, MORE_STYLE, '}',
+        'div.overflow>div.closed {', OVERFLOW_TAB_STRIP_STYLE_CLOSED, '}',
+        'div.overflow>div.open {', OVERFLOW_TAB_STRIP_STYLE_OPEN, '}',
+        '.contents {', CURRENT_CONTENTS_STYLE, '}',
+        '.help {', HELP_STYLE, '}',
+    '</style>',
+    '<div class="container">',
+        '<div class="tab-strip">',
+            '<div class="tab-wrapper">',
                '<content class="strip" select="h2:nth-of-type(-n+', OVERFLOW_LIMIT, ')"></content>',
             '</div>',
-            '<div class="overflow" style="', OVERFLOW_STYLE, '">',
-                '<div style="', TAB_WRAPPER_STYLE, '; overflow: hidden">',
-                    '<div class="more" style="', TAB_STYLE, MORE_STYLE, '">&hellip;</div>',
+            '<div class="overflow">',
+                '<div class="tab-wrapper">',
+                    '<div class="more">&hellip;</div>',
                 '</div>',
-                '<div style="', OVERFLOW_TAB_STRIP_STYLE_CLOSED, '">',
+                '<div class="closed">',
                     '<content class="overflow" select="h2:nth-of-type(n+', OVERFLOW_LIMIT, ')"></content>',
                 '</div>',
             '</div>',
         '</div>',
-        '<div style="', CURRENT_CONTENTS_STYLE, '">',
+        '<div class="contents">',
             '<content class="current" select="section:nth-of-type(1)"></content>',
         '</div>',
-        '<div style="', HELP_STYLE, '">',
+        '<div class="help">',
             'Use <code>Ctrl+&lt;Number&gt;</code> to select the tab directly, <code>Ctrl+{</code> or <code>Ctrl+}</code> to cycle between tabs. Click on "&hellip;" to see more tabs.',
         '</div>',
     '</div>',
@@ -101,13 +113,11 @@ TabsControl.prototype = {
         }
     },
     openMore: function() {
-        this.more.style.cssText = CURRENT_TAB_STYLE + TAB_STYLE;
-        this.menu.style.cssText = OVERFLOW_TAB_STRIP_STYLE_OPEN;
+        this.menu.className = 'open';
         this.moreOpened = true;
     },
     closeMore: function()  {
-        this.more.style.cssText = TAB_STYLE;
-        this.menu.style.cssText = OVERFLOW_TAB_STRIP_STYLE_CLOSED;
+        this.menu.className = 'closed';
         this.moreOpened = false;
     },
     onClickOverflow: function(evt) {
