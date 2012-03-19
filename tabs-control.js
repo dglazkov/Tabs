@@ -65,15 +65,12 @@ var HTML_TEMPLATE = [
 function TabsControl(host)
 {
     this.root = new WebKitShadowRoot(host);
-    // FIXME: Once root.innerHTML is available, remove the extra container.
-    var container = document.createElement('div');
-    container.innerHTML = HTML_TEMPLATE;
-    this.root.appendChild(container);
+    this.root.innerHTML = HTML_TEMPLATE;
     this.currentIndex = 1;
     this.moreOpened = false;
-    this.style = container.querySelector('style').sheet;
-    this.current = container.querySelector('content.current');
-    var overflow = container.querySelector('.overflow');
+    this.style = this.root.querySelector('style').sheet;
+    this.current = this.root.querySelector('content.current');
+    var overflow = this.root.querySelector('.overflow');
     overflow.addEventListener('click', this.onClickOverflow.bind(this));
     this.more = overflow.querySelector('.more');
     this.menu = overflow.lastElementChild;
